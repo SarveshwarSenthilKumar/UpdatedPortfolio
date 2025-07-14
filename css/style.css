@@ -1,0 +1,184 @@
+/* Main site styles extracted from index.html */
+
+body {
+  background-image: url('https://papers.co/wallpaper/papers.co-vb40-wallpaper-geometry-black-pattern-41-iphone-wallpaper.jpg');
+  font-family: Calibri, Arial, sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.topnav {
+  background-color: #222222;
+  position: fixed;
+  top: 0px;
+  z-index: 9999;
+  width: 100%;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.topnav a {
+  float: right;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 20px 20px;
+  font-family: Calibri;
+  margin-top: 0.2%;
+  padding-bottom: 20px;
+  text-decoration: none;
+  font-size: 1vw;
+  border-right: 2px solid black;
+}
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+.topnav a.active {
+  background-color: #00b4a3;
+  color: white;
+}
+.topnav.visible {
+  opacity: 1;
+  visibility: visible;
+}
+.topnav.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+@media (max-width: 768px) {
+  .topnav.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .topnav.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Details and summary styling */
+details {
+  font-family: Arial, sans-serif;
+  margin-bottom: 10px;
+}
+summary {
+  cursor: pointer;
+  font-size: 2.25vw;
+  font-weight: bold;
+}
+
+/* Slideshow styles */
+.mySlides {display: none}
+img {vertical-align: middle;}
+.slideshow-container {
+  margin-top: 2%;
+  max-width: 80%;
+  position: relative;
+  margin: auto;
+}
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+.dot, .dot2 {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+.active, .dot:hover, .dot2:hover {
+  background-color: #717171;
+}
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
+/* Resume tab styles */
+.resumeTab {
+  transition: background-color 0.3s;
+}
+.resumeTab:hover {
+  background-color: #444 !important;
+}
+.activeTab {
+  background-color: #00bb77 !important;
+}
+.resumeContent {
+  display: none;
+}
+
+/* Achievement search styles */
+#aAchievementsContainer > div {
+  background-color: #222;
+  border-radius: 8px;
+  padding: 18px;
+  border-left: 4px solid #00bb77;
+  margin-bottom: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+#aAchievementsContainer > div:hover {
+  transform: translateX(5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Custom color classes for project highlights */
+.gemini-text {
+  background: linear-gradient(135deg, #4285F4, #9B72CB, #FF6BD6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  font-size: 1.5vw;
+}
+.genai-genesis {
+  background: linear-gradient(45deg, #3A86FF, #0FA958);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+} 

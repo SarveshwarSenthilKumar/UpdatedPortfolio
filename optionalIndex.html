@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarveshwar Senthil Kumar | Full-Stack Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://sarvesh313.files.wordpress.com/2019/12/ada214a6-a69d-4a3e-b61c-df89e8eee082.jpeg" rel="shortcut icon" type="image/x-icon">
+  <style>
+    :root {
+      --primary: #00b4a3;
+      --secondary: #1a1a2e;
+      --accent: #ff4757;
+      --text: #f8f9fa;
+      --text-secondary: #adb5bd;
+      --dark-bg: #0f0f1a;
+      --card-bg: #16213e;
+      --gradient: linear-gradient(135deg, #00b4a3 0%, #3a86ff 100%);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      background-image: url('https://papers.co/wallpaper/papers.co-vb40-wallpaper-geometry-black-pattern-41-iphone-wallpaper.jpg');
+      background-attachment: fixed;
+      background-size: cover;
+    }
+    
+    /* 3D Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--dark-bg);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 5px;
+    }
+    
+    /* Navigation */
+    .topnav {
+      background-color: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 5%;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .topnav.hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    
+    .topnav.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+    
+    .social-links {
+      display: flex;
+      align-items: center;
+    }
+    
+    .topnav a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 10px 15px;
+      margin: 0 5px;
+      font-size: 1rem;
+      font-weight: 500;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .topnav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+    
+    .topnav a:hover::after {
+      width: 100%;
+    }
+    
+    .topnav a:hover {
+      color: var(--primary);
+    }
+    
+    .topnav a.active {
+      background: var(--gradient);
+      color: white;
+      animation: pulse 2s infinite;
+    }
+    
+    .topnav a i {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .topnav a:hover i {
+      transform: scale(1.2);
+    }
+    
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 5%;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 15, 26, 0.7);
+      z-index: -1;
+    }
+    
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -2;
+    }
+    
+    .hero-content {
+      max-width: 900px;
+      animation: fadeIn 1s ease-out;
+    }
+    
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 4px 10px rgba(0, 180, 163, 0.3);
+    }
+    
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      color: var(--text-secondary);
+    }
+    
+    /* Button Styles */
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    
+    .btn {
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient);
+      z-index: -1;
+      transition: all 0.3s ease;
+    }
+    
+    .btn:hover::before {
+      transform: scale(1.1);
+    }
+    
+    .btn-primary {
+      background: var(--gradient);
+      color: white;
+    }
+    
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    /* Section Styles */
+    .section {
+      padding: 100px 5%;
+      position: relative;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 50px;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--gradient);
+      border-radius: 3px;
+    }
+    
+    /* Card Styles */
+    .card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--gradient);
+    }
+    
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+    
+    .card-content {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+    
+    .card-links a {
+      color: var(--primary);
+      text-decoration: none;
+      margin-right: 15px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .card-links a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Project Highlights */
+    .project-highlight {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    
+    .project-card {
+      flex: 1 1 300px;
+      max-width: 400px;
+      perspective: 1000px;
+    }
+    
+    .project-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+    
+    .project-card:hover .project-card-inner {
+      transform: rotateY(180deg);
+    }
+    
+    .project-card-front, .project-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .project-card-front {
+      background: var(--card-bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      text-align: center;
+    }
+    
+    .project-card-back {
+      background: var(--secondary);
+      transform: rotateY(180deg);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .project-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+    
+    /* About Section */
+    .about-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 50px;
+    }
+    
+    .about-image {
+      flex: 1 1 300px;
+      max-width: 400px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      transform: rotate(-5deg);
+      transition: all 0.4s ease;
+    }
+    
+    .about-image:hover {
+      transform: rotate(0deg) scale(1.05);
+    }
+    
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .about-content {
+      flex: 2 1 500px;
+    }
+    
+    /* Contact Section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .contact-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .contact-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-5px);
+    }
+    
+    .contact-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+    
+    .contact-card h3 {
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+    
+    .contact-card a {
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .contact-card a:hover {
+      color: var(--primary);
+    }
+    
+    /* Back to top button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--gradient);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      box-shadow: 0 5px 20px rgba(0, 180, 163, 0.4);
+      transition: all 0.3s ease;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+    }
+    
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 180, 163, 0.6);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--secondary);
+      padding: 30px 5%;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    /* Animations for elements */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .topnav {
+        flex-direction: column;
+        padding: 15px;
+      }
+      
+      .nav-links, .social-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 10px;
+      }
+      
+      .topnav a {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .section {
+        padding: 70px 5%;
+      }
+      
+      .about-container {
+        flex-direction: column;
+      }
+      
+      .about-image {
+        max-width: 100%;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+      
+      .card {
+        padding: 20px;
+      }
+    }
+    
+    /* Custom text colors */
+    .darkgreen { color: #00bb77; }
+    .golden { color: yellow; }
+    .red { color: #ff474c; }
+    .white { color: white; }
+    .orange { color: #FFA800; }
+    .blue { color: #4B8BBE; }
+    .purple { color: #720E9E; }
+    .sqlite3blue { color: #0073CF; }
+    .arduino { color: rgb(0, 183, 169); }
+    .flask { color: rgb(0, 178, 178); }
+    .yellow { color: yellow; }
+    .Wb { color: white; }
+    .bronze { color: rgb(205, 127, 50); }
+    .green { color: #4e7837; }
+    .cool { color: #F0E68C; }
+    .highlight { color: #CD853F; }
+    .volun { color: #4467C4; }
+    .toronto { color: #87cefa; }
+    .careage { color: #316cb8; }
+    .cohere { color: #1CAA96; }
+    
+    /* Gemini gradient text */
+    .gemini-text {
+      background: linear-gradient(135deg, #4285F4, #9B72CB, #FF6BD6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+    }
+    
+    /* GenAI Genesis gradient text */
+    .genai-genesis {
+      background: linear-gradient(45deg, #3A86FF, #0FA958);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+    }
+    
+    /* EurekaHacks gradient text */
+    .eurekahacks {
+      background: linear-gradient(45deg, #c154c1, #5a2a8a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+    }
+    
+    /* Details/summary styling */
+    details {
+      margin-bottom: 20px;
+      background: var(--card-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    summary {
+      padding: 20px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--primary);
+      transition: all 0.3s ease;
+      list-style: none;
+      position: relative;
+    }
+    
+    summary::-webkit-details-marker {
+      display: none;
+    }
+    
+    summary::after {
+      content: '+';
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    details[open] summary::after {
+      content: '-';
+    }
+    
+    details[open] summary {
+      background: rgba(0, 180, 163, 0.1);
+    }
+    
+    details p {
+      padding: 0 20px 20px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* Slideshow styling */
+    .slideshow-container {
+      max-width: 800px;
+      position: relative;
+      margin: 40px auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .mySlides {
+      display: none;
+      text-align: center;
+    }
+    
+    .mySlides img {
+      max-width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+      border-radius: 15px;
+    }
+    
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -22px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+    
+    .prev:hover, .next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    
+    .text {
+      color: #f2f2f2;
+      font-size: 15px;
+      padding: 8px 12px;
+      position: absolute;
+      bottom: 8px;
+      width: 100%;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    
+    .numbertext {
+      color: #f2f2f2;
+      font-size: 12px;
+      padding: 8px 12px;
+      position: absolute;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 0 0 5px 0;
+    }
+    
+    .dot-container {
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+    
+    .active, .dot:hover {
+      background-color: var(--primary);
+    }
+    
+    .fade {
+      animation-name: fade;
+      animation-duration: 1.5s;
+    }
+    
+    @keyframes fade {
+      from {opacity: .4} 
+      to {opacity: 1}
+    }
+    
+    /* Video container */
+    .video-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin: 30px 0;
+    }
+    
+    .video-wrapper {
+      flex: 1 1 400px;
+      max-width: 600px;
+    }
+    
+    .video-wrapper iframe {
+      width: 100%;
+      height: 300px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Increase size of Relevant Resources cards */
+    .project-highlight {
+    gap: 40px; /* Increase gap between cards */
+    margin: 40px 0;
+    }
+
+    .project-card {
+    flex: 1 1 350px; /* Increase minimum width to 350px */
+    max-width: 450px; /* Increase maximum width to 450px */
+    min-height: 280px; /* Set minimum height */
+    }
+
+    .project-card-front, 
+    .project-card-back {
+    padding: 40px; /* Increase internal padding */
+    }
+
+    .project-icon {
+    font-size: 4rem !important; /* Increase icon size */
+    margin-bottom: 30px !important;
+    }
+
+    .project-card h3 {
+    font-size: 1.8rem !important; /* Increase title size */
+    margin-bottom: 20px !important;
+    }
+
+    .project-card p {
+    font-size: 1.1rem !important; /* Increase text size */
+    }
+
+    .project-card .btn {
+    padding: 15px 30px !important; /* Increase button size */
+    font-size: 1.1rem !important;
+    }
+
+    /* Hover effects */
+    .project-card:hover {
+    transform: translateY(-15px) scale(1.03) !important; /* More pronounced hover effect */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+    .project-card {
+        flex: 1 1 300px;
+        max-width: 400px;
+    }
+    }
+
+    @media (max-width: 768px) {
+    .project-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+    }
+    /* Hero Image Brightness Enhancement */
+    .hero::before {
+    background: rgba(15, 15, 26, 0.5) !important; /* Reduced dark overlay opacity */
+    backdrop-filter: brightness(1.1) contrast(1.1); /* Brighten and enhance contrast */
+    }
+
+    .hero-image {
+    filter: brightness(1.15) contrast(1.05) saturate(1.1); /* Enhanced image processing */
+    animation: pulseLight 8s infinite alternate; /* Subtle pulsating effect */
+    }
+
+    @keyframes pulseLight {
+    0% {
+        filter: brightness(1.15) contrast(1.05) saturate(1.1);
+    }
+    100% {
+        filter: brightness(1.25) contrast(1.1) saturate(1.15);
+    }
+    }
+
+    /* Text Enhancements to maintain readability */
+    .hero-content h1 {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .hero-content p {
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    /* Alternative - Show full image with letterboxing */
+    .hero-image {
+        object-fit: contain;
+        background-color: #000; /* Creates letterbox bars */
+        width: auto;
+        height: auto;
+        min-width: 100%;
+        min-height: 100%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="topnav visible">
+    <div class="social-links">
+      <a target="_blank" href="https://github.com/SarveshwarSenthilKumar"><i class="fa-brands fa-github"></i></a>
+      <a target="_blank" href="https://replit.com/@sarvesh313"><i class="fa-solid fa-code"></i></a>
+      <a target="_blank" href="https://sarvesh313.wordpress.com"><i class="fa-brands fa-wordpress-simple"></i></a>
+      <a target="_blank" href="https://www.linkedin.com/in/sarveshwarsenthilkumar/"><i class="fa-brands fa-linkedin"></i></a>
+      <a target="_blank" href="mailto: Sarveshwar313@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+      <a target="_blank" href="tel:437-450-4378"><i class="fa-solid fa-phone"></i></a>
+    </div>
+    <div class="nav-links">
+      <a href="#techprojects">Technical Projects</a>
+      <a href="#nonprogramtech">Non-Programming Tech</a>
+      <a href="#nontechprojects">Non-Tech Projects</a>
+      <a href="#aboutme">About Me</a>
+      <a href="#contactme">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="start">
+    <img src="https://i.ibb.co/9t7fqTh/Interview-CP24.jpg" alt="CP24 Interview" class="hero-image">
+    <div class="hero-content">
+      <h1>Sarveshwar Senthil Kumar</h1>
+      <p>Full-Stack Software Engineer</p>
+      <div class="btn-container">
+        <a href="#techprojects" class="btn btn-primary">View Projects</a>
+        <a href="#contactme" class="btn btn-secondary">Contact Me</a><br>
+        <a style="width: 40%;" href="index.html" class="btn btn-secondary">Go to Home</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links Section -->
+  <section class="section">
+    <h2 class="section-title">Relevant Resources</h2>
+    <div class="project-highlight">
+      <div class="project-card animate-on-scroll">
+        <div class="project-card-inner">
+          <div class="project-card-front">
+            <i class="fab fa-github project-icon"></i>
+            <h3>GitHub</h3>
+            <p>Explore my code repositories</p>
+          </div>
+          <div class="project-card-back">
+            <a target="_blank" href="https://github.com/SarveshwarSenthilKumar" class="btn btn-primary">Visit GitHub</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="project-card animate-on-scroll">
+        <div class="project-card-inner">
+          <div class="project-card-front">
+            <i class="fas fa-code project-icon"></i>
+            <h3>Replit</h3>
+            <p>Interactive coding projects</p>
+          </div>
+          <div class="project-card-back">
+            <a target="_blank" href="https://replit.com/@sarvesh313" class="btn btn-primary">Visit Replit</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="project-card animate-on-scroll">
+        <div class="project-card-inner">
+          <div class="project-card-front">
+            <i class="fab fa-wordpress project-icon"></i>
+            <h3>WordPress</h3>
+            <p>My WordPress site</p>
+          </div>
+          <div class="project-card-back">
+            <a target="_blank" href="https://sarvesh313.wordpress.com" class="btn btn-primary">Visit WordPress</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="project-card animate-on-scroll">
+        <div class="project-card-inner">
+          <div class="project-card-front">
+            <i class="fab fa-linkedin project-icon"></i>
+            <h3>LinkedIn</h3>
+            <p>Professional profile</p>
+          </div>
+          <div class="project-card-back">
+            <a target="_blank" href="https://www.linkedin.com/in/sarveshwarsenthilkumar/" class="btn btn-primary">Visit LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Table of Contents -->
+  <section class="section" style="background: rgba(22, 33, 62, 0.7);">
+    <h2 class="section-title">Table of Contents</h2>
+    <div class="card animate-on-scroll">
+      <h3 class="card-title">Technical Projects</h3>
+      <div class="card-content">
+        <details>
+          <summary>
+            <a href="#resourced" style="text-decoration: none; color: inherit;">Chief Technology Officer of <span class="darkgreen">Re</span><span class="golden">Sourced</span></a>
+          </summary>
+          <p><span class="darkgreen">Re</span><span class="golden">Sourced</span>: an educational not-for-profit student organization dedicated to helping students around the world. Presented on <span class="red">CP</span><span class="white">24</span> (National Television), I hold the roles of <span class="darkgreen">"Chief Technology Officer"</span> and <span class="golden">"Chief Marketing Officer"</span>. Responsible for the development of the codebase for the project, created Web App using Flask and basic web languages, in conjunction with SQL for the databases, as well as the main informational websites. Spearheaded the recruitment process and oversaw the operations of the technical team.</p>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#autothrottle" style="text-decoration: none; color: inherit;"><span class="grey">Auto-Throttle</span></a>
+          </summary>
+          <p>Contribution to an autonomous self-driving vehicle under development at my high school. Responsibilities include development of code which connected to the <span class="arduino">Arduino</span> which can be controlled via a Webapp developed using <span class="flask">Flask</span> in <span class="yellow">Py</span><span class="blue">thon</span> in conjunction with <span class="arduino">Firmata</span> for <span class="arduino">Arduino Control</span>.</p>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#stocksimulator" style="text-decoration: none; color: inherit;"><span class="green">Stock</span> <span class="red">Simulator</span></a>
+          </summary>
+          <p>Personal Project developed in 1 week. Developed a functioning real-time Stock Simulator utilizing the <span class="purple">yFinance</span> module in <span class="yellow">Py</span><span class="blue">thon</span> and incorporating it into a <span class="flask">Flask</span> Webapp using <span class="sqlite3blue">SQLite3</span> database management. A recent addition to this program was where I utilized Google's <span class="gemini-text">Gemini</span> API in order to incorporate an AI chatbot into the app which can provide you with the basic information regarding any particular stock or any questions in general.</p>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#passion" style="text-decoration: none; color: inherit;">Passion</a>
+          </summary>
+          <p>First Installment of the Passion Projects developed by me in Grade 8. The purpose was to create a functioning and useful website that allows students to access relevant links in a more efficient manner. It also has a built-in game which was played by the class every day at the end of the day. There were two more installments to this series with Passion 2, being a personal goal where I learned <span class="orange">Ja</span><span class="Wb">va</span>, and Passion 3 where I decided to tackle the challenge of creating Rock Paper Scissors, Tic-Tac-Toe, and Battleship. This website was presented in front of the entire school and was played by numerous students.</p>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#digitai" style="text-decoration: none; color: inherit;"><span class="orange">HandwrittenDigitRecognition-AI</span></a>
+          </summary>
+          <p>This is my first project where I had a chance to practice building Neural Networks and leveraging them to perform a task. I used <span class="orange">TensorFlow</span> and utilized the <span class="orange">MNIST</span> dataset as well as the <span class="orange">OpenCV</span> module to open a webcam where you can display a number on a piece of text and the program will tell you its prediction of what the number is.</p>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#sarsoftrobot" style="text-decoration: none; color: inherit;">SarsoftRobot</a>
+          </summary>
+          <p>This is my first ever "project", and it is one where I spent two years experimenting and improving. This project is comprised of thousands of lines of code and it was the basis for me to learn <span class="yellow">Py</span><span class="blue">thon</span> and the idea of modules where I had the chance to import and test modules and add it to a never-ending project and portfolio.</p>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#sarquest" style="text-decoration: none; color: inherit;"><span class="orange">Sar</span><span class="Wb">Quest</span></a>
+          </summary>
+          <p>Moving on from my first ever <span class="yellow">Py</span><span class="blue">thon</span> project above, this was the project from which, I first learned <span class="orange">Ja</span><span class="Wb">va</span>. It also allowed me to grasp the concepts of game development, not just from a technical perspective in terms of Object Oriented Programming but also the Graphic Design work which it requires.</p>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#hackathons" style="text-decoration: none; color: #FF8000;">Hackathon Participations</a>
+          </summary>
+          <details>
+            <summary>
+              <a href="#careage" style="text-decoration: none; color: inherit;"><span class="careage">CareAge</span> (<span class="red">Hack</span><span class="white">Canada</span> 2025)</a>
+            </summary>
+            <p>On February 21st, 2025 (21st to 23rd, 36-hour all-nighter), I decided to participate in my first ever hackathon along with a few friends: Ritaj, Ram, and Katherine. The theme of the hackathon was to solve a <span class="red">Canadian</span> <span class="white">Issue</span>. Our project was a web application which connects the older generation to young individuals in order to help out with menial tasks such as shoveling snow off their sidewalks in exchange for volunteer hours as well as <span class="careage">CareAge</span> points which can be used to redeem different prizes. We decided to create the backend using the <span class="flask">Flask</span> module in <span class="yellow">Py</span><span class="blue">thon</span> and coordinate it with a <span class="blue">TypeScript/React</span> frontend along with <span class="sqlite3blue">SQLite3</span> for the databases, which can easily be migrated into <span class="sqlite3blue">MySQL</span> in a professional production environment. In the end, while we may not have won the hackathon, I enjoyed my time there and learned valuable skills such as <span class="blue">React, Docker</span>, AI, Blockchain, Orkes Conductor, Vercel, as well as the power of collaboration.</p>
+          </details>
+
+          <details>
+            <summary>
+              <a href="#inboxarmour" style="text-decoration: none; color: inherit;"><span class="careage" style="color: #4E9F70;">InboxArmour</span> (<span class="genai-genesis">GenAI Genesis</span> 2025)</a>
+            </summary>
+            <p>On March 21st, 2025 (21st to 23rd, 36-hour all-nighter), I decided to participate in my second ever hackathon; GenAI Genesis 2025, Canada's Largest AI Hackathon with over 2100 registrants, 600 hackers, and 160 projects. For this Hackathon, I had the opportunity to team up with Cayden Wong, Mahan Nourhosseinalipour, Tommy Yu. The theme and goal of this hackathon was to use AI for Human Empowerment. Our project was an improved email client which uses a specialized model to detect for spam and scam, while discarding of them accordingly. This would solve the evergrowing problem currently of malicious content online which are sent through emails such as phishing attacks. With our access to emails, we were also able to develop and incorporate additional functionality for users such as a built-in summary feature which can summarize the contents of your emails and provide personalized messages such as messages reminding you to reply or look at urgent emails, as well as a feature which allows the user to create a folder accompanied by a descriptor sentence allowing our AI model to categorize the emails into different folders based on similarity to the descriptor sentences. This project was built with a similar tech stack to some of my other projects, utilizing <span class="flask">Flask</span> in <span class="yellow">Py</span><span class="blue">thon</span> for the backend, coordinating it with a <span class="blue">TypeScript/React</span> frontend, and <span class="sqlite3blue">SQLite3</span> for databases. For our AI models, we used <span class="cohere">Cohere</span>'s pre-made models and fine tuned prompts, however with extra time and resources, a definite future plan would be to have a local model for specialized and more accurate results as well as for privacy reasons.</p>
+          </details>
+
+          <details>
+            <summary>
+              <a href="#eurekahacks" style="text-decoration: none; color: inherit;"><span class="careage" style="color: #32CD32;">Roamify</span> (<span class="eurekahacks">EurekaHacks</span> 2025)</a>
+            </summary>
+            <p>On April 3rd, 2025, I decided to participate in my third ever hackathon; EurekaHacks 2025, Canada's Largest High School Hackathon with over 300 registrants/hackers, and 50 projects. For this Hackathon, I had the opportunity to team up with Pranav Bailoor, one of my best friends, and fellow student of Port Credit Secondary School. The theme of this hackathon was Outdoors. In order to come up with an idea, we went outdoors into the real world and asked people on the street in the surroundings. Their answer was almost always that they 3want to go out but they do not know where to go, and if they do, it takes time which they do not have to plan out the trip. We developed the solution in 8 hours; Roamify, your perzonalized AI trip planner encouraging people to connect with their natural surroundings. We utilize the Google Maps API in order to find visitors attractions in a nearby area, and create an AI generated plan courtesy of Gemini, which is shown to the user. This project was built with a similar tech stack to some of my other projects, utilizing <span class="flask">Flask</span> in <span class="yellow">Py</span><span class="blue">thon</span> for the backend, basic HTML and CSS for the frontend, with <span class="genai-genesis">Google Gemini</span>'s pre-made models and fine tuned prompts, however with extra time and resources, a definite future plan would be to have a local model for specialized and more accurate results, not to mention quicker and more efficient results, as well as for privacy reasons, another future plan would be to have better location tracking and to save the user's preferences in terms of location for training and personalization.</p>
+          </details>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#schoolprojects" style="text-decoration: none; color: inherit;">School Projects and CSN</a>
+          </summary>
+          <p>This section is dedicated to school projects in which I utilized my programming expertise to put my own spin on assignments. As for the latter part of this section, I have attached projects which were connected to CSN or Camilla Senior Network which was an informative monthly presentation to the entire school where I was one of the hosts. I was responsible for all the software development for this project, such as the website, and I had the chance to showcase a lot of projects including the Passion 3 above and HackerLife below. CSN eventually developed and evolved into <span class="darkgreen">Re</span><span class="golden">Sourced</span>.</p>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#compeng" style="text-decoration: none; color: inherit;">Computer Engineering</a>
+          </summary>
+          <p>One of the best courses I opted to take in high school was Grade 11 Computer Engineering. This class taught me valuable technical skills thanks to the adventurous nature of building projects rather than pen and paper studying. In this class, we were had to install and use <span style="color: #86BE43;">Linux</span> as our main operating system and contribute to programming projects, which led us to learn the command line interface as well as the inner workings of <span style="color: #f14e32;">Git</span>. One of the best projects that I had the opportunity of working on was to develop a tachometer for a broken treadmill using an infrared sensor, an 8-bit display and an <span class="arduino">Arduino</span>. This gave me a chance to work on my problem-solving skills as well as my coding skills which can be found on display with the link below.</p>
+        </details>
+      </div>
+    </div>
+
+    <div class="card animate-on-scroll">
+      <h3 class="card-title">Non-Programming Technical Projects</h3>
+      <div class="card-content">
+        <ul>
+          <li><span style="color: #92B662;">On</span>shape</li>
+          <li><span class="arduino">Arduino</span></li>
+          <li><span style="color: #c7053d;">Raspberry</span> <span style="color: #8cc04b;">Pi</span></li>
+          <li>Woodworking</li>
+          <li>Electrical Circuitry</li>
+          <li>Orthographic Drawing</li>
+          <li>Metalworking (Mill, Lathe, Drills, etc.)</li>
+          <li>Compressed Air Car (Aerodynamics, Drag vs. Downforce)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card animate-on-scroll">
+      <h3 class="card-title">Non-Technical Projects</h3>
+      <div class="card-content">
+        <details>
+          <summary>
+            <a href="#resourced2" style="text-decoration: none; color: inherit;">Chief Marketing Officer of <span class="darkgreen">Re</span><span class="golden">Sourced</span></a>
+          </summary>
+          <p>Responsible for the marketing of the project and recruiting new members. This project allowed me to collaborated with others to create promotional materials such as a video. As the CMO, I was also responsible for acquiring the news interview on <span class="red">CP</span><span class="white">24</span>.</p>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#zugzwang" style="text-decoration: none; color: inherit;">President and Founder of <span class="yellow">Zugzwang</span></a>
+          </summary>
+          <p>Responsible for planning and hosting the club events as well as marketing the club. I am grateful for the opportunity to collaborate with my own recruited executive team. I am the main commentator and streamer for the <a href="https://zugzwangcc.wordpress.com" style="color: yellow;">Zugzwang Chess Club</a> media platforms. I was responsible for representing my club and the school chess club, of which I am the president, in two club fairs. The club has grown to encompass 100 avid members across the world, hosting numerous events as well as forming partnerships with university chess clubs and other clubs. We are also an Official Affiliate Partner Club of <span class="green">Chess.com</span>, and are fortunately sponsored by ChessNut who are responsible for the most technologically advanced chess boards in the world.</p>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#chess" style="text-decoration: none; color: inherit;">Avid Chess Enthusiast: 2100-Rated (99.8th Percentile) AFM-title granted</a>
+          </summary>
+          <p>I have played in numerous tournaments across the country including the <span class="bronze">Canadian Youth Chess Championship</span> and have won prizes at certain tournaments adding up to hundreds of dollars. I was also a member of the local municipal Chess Club, <span class="bronze">Mississauga Chess Club</span> as well as the President of my school chess club. I am also <span class="bronze">1 of 1800</span> people in the world as of January 2025 that has acquired the <span class="bronze">AFM</span> title. I am rated <span class="bronze">2100 on <span class="green">Chess.com</span></span> and am in the 99.8th Percentile worldwide.</p>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#scitech" style="text-decoration: none; color: inherit;">Member of the <span class="cool">SciTech Regional Program: School Representative</span></a>
+          </summary>
+          <p>Member of the <span class="cool">SciTech Regional Program</span> at Port Credit Secondary School, I have had the opportunity to work on many fascinating projects during my time in High School and also have fond memories of certain leadership opportunities such as the chance to be a <span class="cool">Representative at the School Openhouse for Prospective Students</span>, I had the chance to talk to students and convince them to join the aforementioned program at our school, and I had the chance to showcase some of my previous projects including <span class="darkgreen">Re</span><span class="golden">Sourced</span>. Lastly, a couple of friends and I were responsible for travelling to a Middle School and enlightening the future students there about High School, the challenges that come along with it, as well as running a <span class="yellow">Py</span><span class="blue">thon</span> Workshop with them.</p>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#certificate" style="text-decoration: none; color: inherit;">Completed <span class="highlight">"Intro to Human Rights and Equity"</span> Course by <span class="volun">Volunteer</span> <span class="toronto">Toronto</span></a>
+          </summary>
+          <p>Completed all parts of the <span class="highlight">"Intro to Human Rights and Equity"</span> Course by <span class="volun">Volunteer</span> <span class="toronto">Toronto</span> necessary for volunteering at large professional venues such as the <span class="highlight">Elevate Festival</span> and the <span class="highlight">Toronto International Film Festival</span>.</p>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#candidates" style="text-decoration: none; color: inherit;">Volunteer at the <span class="orange">2024 FIDE Candidates</span>: 1 of 300 across Canada</a>
+          </summary>
+          <p>Volunteer at the <span class="orange">2024 FIDE Candidates</span>, the most competitive world-class tournament where the next World Champion was chosen. Had the chance to work and meet people from all across the globe who were connected by the wonderful game of Chess. I was <span class="orange">1 of 300</span> people all across Canada who received the chance to volunteer at this best of the best tournament. I had the chance to meet, interview, and take pictures with the best minds in Chess not only in Canada, but across the world.</p>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#ihpyc" style="text-decoration: none; color: inherit;">Student Ambassador of the <span class="red">International Humanitarian Peel Youth Council</span>, a division of the <span class="red">Canadian Red Cross</span></a>
+          </summary>
+          <p>Student Ambassador of the <span class="red">International Humanitarian Peel Youth Council</span>, a division of the <span class="red">Canadian Red Cross</span>. As an Ambassador, my responsibilities included helping to plan two large humanitarian events held at <span class="gold">"University of Toronto: Mississauga"</span> and one in <span class="gold">"Palais Royale"</span> in the heart of Toronto, as well as advertise the event. We were able to get <span class="gold">more than 500 students</span> to participate in the cause on both occasions. I was <span class="gold">1 of 3</span> in Grade 9, and <span class="gold">1 of 300</span> across the entire Greater Toronto Area.</p>
+        </details>
+
+        <details>
+          <summary>
+            <a href="#autobox" style="text-decoration: none; color: inherit;">Host and Reviewer at Auto<span class="green">Box</span></a>
+          </summary>
+          <p>When I was younger, aligned with my interest in the Automotive sector, I had the chance of being the host of Auto<span class="green">Box</span> as a Car Reviewer where I had the chance to improve on my communication skills while learning about and experiencing numerous different vehicles and their features.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Projects Section -->
+  <section class="section" id="techprojects">
+    <h2 class="section-title">Technical Projects</h2>
+    
+    <div class="card animate-on-scroll" id="resourced">
+      <h3 class="card-title"><span class="darkgreen">Re</span><span class="golden">Sourced</span></h3>
+      <div class="card-content">
+        <p><span class="darkgreen">Re</span><span class="golden">Sourced</span>: an educational not-for-profit student organization dedicated to helping students around the world. Presented on <span class="red">CP</span><span class="white">24</span> (National Television), I hold the roles of <span class="darkgreen">"Chief Technology Officer"</span> and <span class="golden">"Chief Marketing Officer"</span>. Responsible for the development of the codebase for the project, created Web App using Flask and basic web languages, in conjunction with SQL for the databases, as well as the main informational websites. Spearheaded the recruitment process and oversaw the operations of the technical team.</p>
+      </div>
+      <div class="card-links">
+        <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/ReSourced-Archive">GitHub Repository for Archived <span class="darkgreen">Re</span><span class="golden">Sourced</span> Website</a>
+        <a target="_blank" href="https://sarveshwarsenthilkumar.github.io/ReSourced-Archive/">Archived Website for <span class="darkgreen">Re</span><span class="golden">Sourced</span></a>
+        <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/ReSourced">GitHub Repository for Main Webapp</a>
+        <a target="_blank" href="https://replit.com/@resourced"><span class="orange">Rep</span><span class="black">lit</span> Codebase</a>
+      </div>
+    </div>
+    
+    <div class="card animate-on-scroll" id="autothrottle">
+      <h3 class="card-title"><span class="grey">Auto-Throttle</span></h3>
+      <div class="card-content">
+        <p>Contribution to an autonomous self-driving vehicle under development at my high school. Responsibilities include development of code which connected to the <span class="arduino">Arduino</span> which can be controlled via a Webapp developed using <span class="flask">Flask</span> in <span class="yellow">Py</span><span class="blue">thon</span> in conjunction with <span class="arduino">Firmata</span> for <span class="arduino">Arduino Control</span>.</p>
+      </div>
+      <div class="card-links">
+        <a target="_blank" href="https://sarveshwarsenthilkumar.github.io/autothrottle.github.io/">Auto-Throttle Website</a>
+        <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/Auto-Throttle-Backend-Codebase">GitHub Repository</a>
+      </div>
+    </div>
+    
+    <div class="card animate-on-scroll" id="stocksimulator">
+      <h3 class="card-title"><span class="green">Stock</span> <span class="red">Simulator</span></h3>
+      <div class="card-content">
+        <p>Personal Project developed in 1 week. Developed a functioning real-time Stock Simulator utilizing the <span class="purple">yFinance</span> module in <span class="yellow">Py</span><span class="blue">thon</span> and incorporating it into a <span class="flask">Flask</span> Webapp using <span class="sqlite3blue">SQLite3</span> database management. A recent addition to this program was where I utilized Google's <span class="gemini-text">Gemini</span> API in order to incorporate an AI chatbot into the app which can provide you with the basic information regarding any particular stock or any questions in general.</p>
+      </div>
+      <div class="card-links">
+        <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/Stock-Simulator/">GitHub Repository</a>
+      </div>
+    </div>
+    
+    <div class="card animate-on-scroll" id="passion">
+      <h3 class="card-title">Passion Projects</h3>
+      <div class="card-content">
+        <p>First Installment of the Passion Projects developed by me in Grade 8. The purpose was to create a functioning and useful website that allows students to access relevant links in a more efficient manner. It also has a built-in game which was played by the class every day at the end of the day. There were two more installments to this series with Passion 2, being a personal goal where I learned <span class="orange">Ja</span><span class="Wb">va</span>, and Passion 3 where I decided to tackle the challenge of creating Rock Paper Scissors, Tic-Tac-Toe, and Battleship. This website was presented in front of the entire school and was played by numerous students.</p>
+      </div>
+      <div class="card-links">
+        <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/Passion">Passion 1 GitHub</a>
+        <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/Passion-3">Passion 3 GitHub</a>
+      </div>
+    </div>
+    
+    <div class="card animate-on-scroll" id="digitai">
+      <h3 class="card-title"><span class="orange">HandwrittenDigitRecognition-AI</span></h3>
+      <div class="card-content">
+        <p>This is my first project where I had a chance to practice building Neural Networks and leveraging them to perform a task. I used <span class="orange">TensorFlow</span> and utilized the <span class="orange">MNIST</span> dataset as well as the <span class="orange">OpenCV</span> module to open a webcam where you can display a number on a piece of text and the program will tell you its prediction of what the number is.</p>
+      </div>
+      <div class="card-links">
+        <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/HandwrittenDigitRecognition-AI">GitHub Repository</a>
+      </div>
+    </div>
+    
+    <div class="card animate-on-scroll" id="sarsoftrobot">
+      <h3 class="card-title">SarsoftRobot</h3>
+      <div class="card-content">
+        <p>This is my first ever "project", and it is one where I spent two years experimenting and improving. This project is comprised of thousands of lines of code and it was the basis for me to learn <span class="yellow">Py</span><span class="blue">thon</span> and the idea of modules where I had the chance to import and test modules and add it to a never-ending project and portfolio.</p>
+      </div>
+      <div class="card-links">
+        <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/SarsoftRobot">GitHub Repository</a>
+      </div>
+    </div>
+    
+    <div class="card animate-on-scroll" id="sarquest">
+      <h3 class="card-title"><span class="orange">Sar</span><span class="Wb">Quest</span></h3>
+      <div class="card-content">
+        <p>Moving on from my first ever <span class="yellow">Py</span><span class="blue">thon</span> project above, this was the project from which I first learned <span class="orange">Ja</span><span class="Wb">va</span>. It also allowed me to grasp the concepts of game development, not just from a technical perspective in terms of Object Oriented Programming but also the Graphic Design work which it requires.</p>
+      </div>
+      <div class="card-links">
+        <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/SarQuest">GitHub Repository</a>
+      </div>
+    </div>
+    
+    <div class="card animate-on-scroll" id="hackathons">
+        <h3 class="card-title">Hackathon Participations</h3>
+        <div class="card-content">
+          <p>I've added a new section to showcase my hackathon experiences, highlighting the projects my teams and I built under intense time constraints. Each entry includes a brief description of the hackathon, our project, the technologies we used, and any awards or recognition we received. Hackathons have been a huge part of my learning journey, pushing me to solve real-world problems creatively while collaborating with talented developers.</p>
+        </div>
+        
+        <div class="hackathon-accordion">
+          <!-- CareAge Hackathon -->
+          <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false" aria-controls="careage-content">
+              <span class="accordion-title">
+                <span class="careage">CareAge</span> (<span class="red">Hack</span><span class="white">Canada</span> 2025)
+                <span class="accordion-icon"></span>
+              </span>
+            </button>
+            <div class="accordion-content" id="careage-content">
+              <div class="card-content">
+                <p>On February 21st, 2025 (21st to 23rd, 36-hour all-nighter), I decided to participate in my first ever hackathon along with a few friends: Ritaj, Ram, and Katherine. The theme of the hackathon was to solve a <span class="red">Canadian</span> <span class="white">Issue</span>. Our project was a web application which connects the older generation to young individuals in order to help out with menial tasks such as shoveling snow off their sidewalks in exchange for volunteer hours as well as <span class="careage">CareAge</span> points which can be used to redeem different prizes. We decided to create the backend using the <span class="flask">Flask</span> module in <span class="yellow">Py</span><span class="blue">thon</span> and coordinate it with a <span class="blue">TypeScript/React</span> frontend along with <span class="sqlite3blue">SQLite3</span> for the databases, which can easily be migrated into <span class="sqlite3blue">MySQL</span> in a professional production environment. In the end, while we may not have won the hackathon, I enjoyed my time there and learned valuable skills such as <span class="blue">React, Docker</span>, AI, Blockchain, Orkes Conductor, Vercel, as well as the power of collaboration.</p>
+              </div>
+              <div class="card-links">
+                <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/NewCareAge">GitHub Repository</a>
+                <a target="_blank" href="https://www.linkedin.com/posts/sarveshwarsenthilkumar_three-weeks-ago-starting-on-friday-activity-7307942832940494848-wcnR?utm_source=share&utm_medium=member_desktop&rcm=ACoAABbvfsYBo6h_nl87WCxxvnMw-39j8pI31YI">LinkedIn Post</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- InboxArmour Hackathon -->
+          <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false" aria-controls="inboxarmour-content">
+              <span class="accordion-title">
+                <span style="color: #4E9F70;">InboxArmour</span> (<span class="genai-genesis">GenAI Genesis</span> 2025)
+                <span class="accordion-icon"></span>
+              </span>
+            </button>
+            <div class="accordion-content" id="inboxarmour-content">
+              <div class="card-content">
+                <p>On March 21st, 2025 (21st to 23rd, 36-hour all-nighter), I decided to participate in my second ever hackathon; GenAI Genesis 2025, Canada's Largest AI Hackathon with over 2100 registrants, 600 hackers, and 160 projects. For this Hackathon, I had the opportunity to team up with Cayden Wong, Mahan Nourhosseinalipour, Tommy Yu. The theme and goal of this hackathon was to use AI for Human Empowerment. Our project was an improved email client which uses a specialized model to detect spam and scam, while discarding them accordingly. This would solve the ever-growing problem currently of malicious content online which are sent through emails such as phishing attacks. With our access to emails, we were also able to develop and incorporate additional functionality for users such as a built-in summary feature which can summarize the contents of your emails and provide personalized messages such as messages reminding you to reply or look at urgent emails, as well as a feature which allows the user to create a folder accompanied by a descriptor sentence allowing our AI model to categorize the emails into different folders based on similarity to the descriptor sentences. This project was built with a similar tech stack to some of my other projects, utilizing <span class="flask">Flask</span> in <span class="yellow">Py</span><span class="blue">thon</span> for the backend, coordinating it with a <span class="blue">TypeScript/React</span> frontend, and <span class="sqlite3blue">SQLite3</span> for databases. For our AI models, we used <span class="cohere">Cohere</span>'s pre-made models and fine tuned prompts, however with extra time and resources, a definite future plan would be to have a local model for specialized and more accurate results as well as for privacy reasons.</p>
+              </div>
+              <div class="card-links">
+                <a target="_blank" href="https://github.com/IDontKnow64/InboxArmour">GitHub Repository</a>
+                <a target="_blank" href="https://www.linkedin.com/posts/sarveshwarsenthilkumar_ever-had-an-important-email-get-buried-under-activity-7311590670375260160-Rw5G?utm_source=share&utm_medium=member_desktop&rcm=ACoAABbvfsYBo6h_nl87WCxxvnMw-39j8pI31YI">LinkedIn Post</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Roamify Hackathon -->
+          <div class="accordion-item">
+            <button class="accordion-button" aria-expanded="false" aria-controls="eurekahacks-content">
+              <span class="accordion-title">
+                <span style="color: #32CD32;">Roamify</span> (<span class="eurekahacks">EurekaHacks</span> 2025)
+                <span class="accordion-icon"></span>
+              </span>
+            </button>
+            <div class="accordion-content" id="eurekahacks-content">
+              <div class="card-content">
+                <p>On April 3rd, 2025, I decided to participate in my third ever hackathon; EurekaHacks 2025, Canada's Largest High School Hackathon with over 300 registrants/hackers, and 50 projects. For this Hackathon, I had the opportunity to team up with Pranav Bailoor, one of my best friends, and fellow student of Port Credit Secondary School. The theme of this hackathon was Outdoors. In order to come up with an idea, we went outdoors into the real world and asked people on the street in the surroundings. Their answer was almost always that they want to go out but they do not know where to go, and if they do, it takes time which they do not have to plan out the trip. We developed the solution in 8 hours; Roamify, your personalized AI trip planner encouraging people to connect with their natural surroundings. We utilize the Google Maps API in order to find visitors attractions in a nearby area, and create an AI generated plan courtesy of Gemini, which is shown to the user. This project was built with a similar tech stack to some of my other projects, utilizing <span class="flask">Flask</span> in <span class="yellow">Py</span><span class="blue">thon</span> for the backend, basic HTML and CSS for the frontend, with <span class="genai-genesis">Google Gemini</span>'s pre-made models and fine tuned prompts, however with extra time and resources, a definite future plan would be to have a local model for specialized and more accurate results, not to mention quicker and more efficient results, as well as for privacy reasons, another future plan would be to have better location tracking and to save the user's preferences in terms of location for training and personalization.</p>
+              </div>
+              <div class="card-links">
+                <a target="_blank" href="SarveshwarSenthilKumar.github.io/RoamifyLanding/">Roamify Landing Page</a>
+                <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/Roamify/">GitHub Repository</a>
+                <a target="_blank" href="https://www.linkedin.com/posts/sarveshwarsenthilkumar_excited-to-share-my-experience-at-eurekahacks-activity-7319098363042222080-rL4r?utm_source=share&utm_medium=member_desktop&rcm=ACoAABbvfsYBo6h_nl87WCxxvnMw-39j8pI31YI">LinkedIn Post</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <style>
+        /* Accordion Styles */
+        .hackathon-accordion {
+          margin-top: 20px;
+          border-radius: 8px;
+          overflow: hidden;
+        }
+        
+        .accordion-item {
+          margin-bottom: 10px;
+          border-radius: 8px;
+          overflow: hidden;
+          background: rgba(22, 33, 62, 0.3);
+          transition: all 0.3s ease;
+        }
+        
+        .accordion-item:hover {
+          background: rgba(22, 33, 62, 0.5);
+        }
+        
+        .accordion-button {
+          width: 100%;
+          padding: 18px 25px;
+          text-align: left;
+          background: rgba(22, 33, 62, 0.5);
+          border: none;
+          color: white;
+          font-size: 1.1rem;
+          font-weight: 600;
+          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          transition: all 0.3s ease;
+        }
+        
+        .accordion-button:hover {
+          background: rgba(22, 33, 62, 0.7);
+        }
+        
+        .accordion-title {
+          display: flex;
+          align-items: center;
+          width: 100%;
+        }
+        
+        .accordion-icon {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          margin-left: auto;
+          position: relative;
+          transition: transform 0.3s ease;
+        }
+        
+        .accordion-icon::before,
+        .accordion-icon::after {
+          content: '';
+          position: absolute;
+          background-color: var(--primary);
+          transition: transform 0.3s ease;
+        }
+        
+        .accordion-icon::before {
+          top: 50%;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          transform: translateY(-50%);
+        }
+        
+        .accordion-icon::after {
+          top: 0;
+          left: 50%;
+          width: 2px;
+          height: 100%;
+          transform: translateX(-50%);
+        }
+        
+        .accordion-button[aria-expanded="true"] .accordion-icon::after {
+          transform: translateX(-50%) rotate(90deg);
+        }
+        
+        .accordion-button[aria-expanded="true"] .accordion-icon {
+          transform: rotate(45deg);
+        }
+        
+        .accordion-content {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease, padding 0.3s ease;
+          background: rgba(22, 33, 62, 0.2);
+        }
+        
+        .accordion-button[aria-expanded="true"] + .accordion-content {
+          max-height: 2000px; /* Adjust based on your content */
+          padding: 0 25px 20px;
+        }
+        
+        .accordion-content .card-content {
+          padding: 15px 0;
+        }
+        
+        .accordion-content .card-links {
+          padding: 10px 0;
+        }
+      </style>
+      
+      <script>
+        // Accordion functionality
+        document.querySelectorAll('.accordion-button').forEach(button => {
+          button.addEventListener('click', () => {
+            const expanded = button.getAttribute('aria-expanded') === 'true';
+            button.setAttribute('aria-expanded', !expanded);
+            
+            // Close other accordion items when one is opened
+            if (!expanded) {
+              document.querySelectorAll('.accordion-button').forEach(otherButton => {
+                if (otherButton !== button && otherButton.getAttribute('aria-expanded') === 'true') {
+                  otherButton.setAttribute('aria-expanded', 'false');
+                  otherButton.nextElementSibling.style.maxHeight = '0';
+                  otherButton.nextElementSibling.style.padding = '0';
+                }
+              });
+            }
+            
+            const content = button.nextElementSibling;
+            if (expanded) {
+              content.style.maxHeight = '0';
+              content.style.padding = '0';
+            } else {
+              content.style.maxHeight = content.scrollHeight + 'px';
+              content.style.padding = '0 25px 20px';
+            }
+          });
+        });
+      </script>
+    
+    <div class="card animate-on-scroll" id="schoolprojects">
+      <h3 class="card-title">School Projects and CSN</h3>
+      <div class="card-content">
+        <p>This section is dedicated to school projects in which I utilized my programming expertise to put my own spin on assignments. As for the latter part of this section, I have attached projects which were connected to CSN or Camilla Senior Network which was an informative monthly presentation to the entire school where I was one of the hosts. I was responsible for all the software development for this project, such as the website, and I had the chance to showcase a lot of projects including the Passion 3 above and HackerLife below. CSN eventually developed and evolved into <span class="darkgreen">Re</span><span class="golden">Sourced</span>.</p>
+      </div>
+      <div class="card-links">
+        <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/Snakisle-Penitentiary">Snakisle-Penitentiary</a>
+        <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/ClimateChangeUnitProject">ClimateChangeUnitProject</a>
+        <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/CSN">CSN</a>
+        <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/HackerLife">HackerLife</a>
+      </div>
+    </div>
+    
+    <div class="card animate-on-scroll" id="compeng">
+      <h3 class="card-title">Computer Engineering</h3>
+      <div class="card-content">
+        <p>One of the best courses I opted to take in high school was Grade 11 Computer Engineering. This class taught me valuable technical skills thanks to the adventurous nature of building projects rather than pen and paper studying. In this class, we were had to install and use <span style="color: #86BE43;">Linux</span> as our main operating system and contribute to programming projects, which led us to learn the command line interface as well as the inner workings of <span style="color: #f14e32;">Git</span>. One of the best projects that I had the opportunity of working on was to develop a tachometer for a broken treadmill using an infrared sensor, an 8-bit display and an <span class="arduino">Arduino</span>. This gave me a chance to work on my problem-solving skills as well as my coding skills which can be found on display with the link below.</p>
+      </div>
+      <div class="card-links">
+        <a target="_blank" href="https://github.com/SarveshwarSenthilKumar/Tachometer-Configuration">GitHub Repository</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Non-Programming Technical Projects -->
+  <section class="section" id="nonprogramtech">
+    <h2 class="section-title">Technical Non-Programming Experience</h2>
+    <div class="card animate-on-scroll">
+      <div class="card-content">
+        <p>Apart from Programming, as a result of courses I had the opportunity of taking in high school as part of the <span class="cool">SciTech Regional Program</span> as well as other extracurricular opportunities, I have had the chance to hone in on technical skills that are useful in the modern workforce, such as:</p>
+        <ul style="margin-top: 15px;">
+          <li><span style="color: #92B662;">On</span>shape</li>
+          <li><span class="arduino">Arduino</span></li>
+          <li><span style="color: #c7053d;">Raspberry</span> <span style="color: #8cc04b;">Pi</span></li>
+          <li>Woodworking</li>
+          <li>Electrical Circuitry</li>
+          <li>Orthographic Drawing</li>
+          <li>Metalworking (Mill, Lathe, Drills, etc.)</li>
+          <li>Compressed Air Car (Aerodynamics, Drag vs. Downforce)</li>
+        </ul>
+      </div>
+    </div>
+    
+    <h3 style="text-align: center; margin: 50px 0 30px; font-size: 1.8rem;">Technical Proof</h3>
+    <div class="slideshow-container animate-on-scroll">
+      <div class="mySlides fade">
+        <div class="numbertext">1 / 16</div>
+        <img src="AirCompressedCar.png" style="width:40%; margin-left: 30%;">
+        <div class="text">Air Compressed Car (1)</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">2 / 16</div>
+        <img src="AirCompressedCar2.png" style="width:40%; margin-left: 30%;">
+        <div class="text">Air Compressed Car (2)</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">3 / 16</div>
+        <img src="AirCompressedCar3.png" style="width:40%; margin-left: 30%;">
+        <div class="text">Air Compressed Car (3)</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">4 / 16</div>
+        <img src="AirCompressedCar4.png" style="width:40%; margin-left: 30%;">
+        <div class="text">Air Compressed Car (4)</div>
+      </div>
+      
+      <div class="mySlides fade">
+        <div class="numbertext">5 / 16</div>
+        <img src="CompressedAirCarOnshape.png" style="width:100%;">
+        <div class="text">Air Compressed Car Onshape Render</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">6 / 16</div>
+        <img src="CompressedAirCarOrtho.png" style="width:100%;">
+        <div class="text">Air Compressed Car Orthographic</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">7 / 16</div>
+        <img src="TechCNTower.png" style="width:60%; margin-left: 20%;">
+        <div class="text">Wooden Custom CN Tower</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">8 / 16</div>
+        <img src="TechWaterWheel.png" style="width:60%; margin-left: 20%;">
+        <div class="text">Wooden Water Wheel (Sustainable Energy)</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">9 / 16</div>
+        <img src="WaterWheelOrtho.png" style="width:100%;">
+        <div class="text">Water Wheel Onshape Render</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">10 / 16</div>
+        <img src="TicTacToeBoard.JPG" style="width:100%;">
+        <div class="text">Tic-Tac-Toe Board and Pegs (Metal Manufacturing)</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">11 / 16</div>
+        <img src="FerrariF40Onshape.png" style="width:100%;">
+        <div class="text">Ferrari F40 Onshape Render</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">12 / 16</div>
+        <img src="DovetailSlideBlockOnshape.png" style="width:100%;">
+        <div class="text">Dovetail Slide Block Onshape Render</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">13 / 16</div>
+        <img src="DovetailSlideBlockOrtho.png" style="width:100%;">
+        <div class="text">Dovetail Slide Block Orthographic</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">14 / 16</div>
+        <img src="ViseBaseOnshape.png" style="width:100%;">
+        <div class="text">Vise Base Onshape Render</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">15 / 16</div>
+        <img src="TreadmillTachometer.jpeg" style="width:60%; margin-left: 20%;">
+        <div class="text">Infrared Sensor Treadmill Tachometer (1)</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">16 / 16</div>
+        <img src="TreadmillTachometer2.jpeg" style="width:60%; margin-left: 20%;">
+        <div class="text">Infrared Sensor Treadmill Tachometer (2)</div>
+      </div>
+
+      <a class="prev" onclick="plusSlides(-1)">❮</a>
+      <a class="next" onclick="plusSlides(1)">❯</a>
+    </div>
+    <div class="dot-container">
+      <span class="dot" onclick="currentSlide(1)"></span> 
+      <span class="dot" onclick="currentSlide(2)"></span> 
+      <span class="dot" onclick="currentSlide(3)"></span> 
+      <span class="dot" onclick="currentSlide(4)"></span> 
+      <span class="dot" onclick="currentSlide(5)"></span> 
+      <span class="dot" onclick="currentSlide(6)"></span> 
+      <span class="dot" onclick="currentSlide(7)"></span> 
+      <span class="dot" onclick="currentSlide(8)"></span> 
+      <span class="dot" onclick="currentSlide(9)"></span> 
+      <span class="dot" onclick="currentSlide(10)"></span> 
+      <span class="dot" onclick="currentSlide(11)"></span> 
+      <span class="dot" onclick="currentSlide(12)"></span> 
+      <span class="dot" onclick="currentSlide(13)"></span> 
+      <span class="dot" onclick="currentSlide(14)"></span> 
+      <span class="dot" onclick="currentSlide(15)"></span> 
+      <span class="dot" onclick="currentSlide(16)"></span> 
+    </div>
+  </section>
+
+  <!-- Non-Technical Projects -->
+  <section class="section" id="nontechprojects">
+    <h2 class="section-title">Non-Technical Experience</h2>
+    
+    <div class="card animate-on-scroll" id="resourced2">
+      <h3 class="card-title"><span class="yellow">Chief Marketing Officer</span> of <span class="darkgreen">Re</span><span class="golden">Sourced</span></h3>
+      <div class="card-content">
+        <p>Responsible for the marketing of the project and recruiting new members. This project allowed me to collaborated with others to create promotional materials such as a video. As the CMO, I was also responsible for acquiring the news interview on <span class="red">CP</span><span class="white">24</span>.</p>
+      </div>
+      <div class="video-container">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/JYr-iSTQSqY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <p style="text-align: center; margin-top: 10px;"><span class="red">CP</span><span class="white">24</span> News Interview</p>
+        </div>
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/ia7CgWwOVCA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <p style="text-align: center; margin-top: 10px;"><span class="darkgreen">Re</span><span class="golden">Sourced</span> Video Ad</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card animate-on-scroll" id="zugzwang">
+      <h3 class="card-title"><span class="yellow">President</span> and <span class="yellow">Founder</span> of <span class="yellow">Zugzwang</span></h3>
+      <div class="card-content">
+        <p>Responsible for planning and hosting the club events as well as marketing the club. I am grateful for the opportunity to collaborate with my own recruited executive team. I am the main commentator and streamer for the <a href="https://zugzwangcc.wordpress.com" style="color: yellow;">Zugzwang Chess Club</a> media platforms. I was responsible for representing my club and the school chess club, of which I am the president, in two club fairs. The club has grown to encompass 100 avid members across the world, hosting numerous events as well as forming partnerships with university chess clubs and other clubs. We are also an Official Affiliate Partner Club of <span class="green">Chess.com</span>, and are fortunately sponsored by ChessNut who are responsible for the most technologically advanced chess boards in the world.</p>
+      </div>
+      <div class="card-links">
+        <a target="_blank" href="https://zugzwangcc.wordpress.com">Zugzwang WordPress</a>
+        <a target="_blank" href="https://zugzwangchessclub.github.io">Zugzwang GitHub Page</a>
+        <a target="_blank" href="https://www.chess.com/club/zugzwang-club" rel="noopener noreferrer">Chess.com Club</a>
+      </div>
+    </div>
+    
+    <div class="card animate-on-scroll" id="chess">
+      <h3 class="card-title">Avid Chess Enthusiast: 2100-Rated (99.8th Percentile) AFM-title granted</h3>
+      <div class="card-content">
+        <p>I have played in numerous tournaments across the country including the <span class="bronze">Canadian Youth Chess Championship</span> and have won prizes at certain tournaments adding up to hundreds of dollars. I was also a member of the local municipal Chess Club, <span class="bronze">Mississauga Chess Club</span> as well as the President of my school chess club. I am also <span class="bronze">1 of 1800</span> people in the world as of January 2025 that has acquired the <span class="bronze">AFM</span> title. I am rated <span class="bronze">2100 on <span class="green">Chess.com</span></span> and am in the 99.8th Percentile worldwide.</p>
+      </div>
+    </div>
+    
+    <div class="card animate-on-scroll" id="scitech">
+      <h3 class="card-title">Member of the <span class="cool">SciTech Regional Program: School Representative</span></h3>
+      <div class="card-content">
+        <p>Member of the <span class="cool">SciTech Regional Program</span> at Port Credit Secondary School, I have had the opportunity to work on many fascinating projects during my time in High School and also have fond memories of certain leadership opportunities such as the chance to be a <span class="cool">Representative at the School Openhouse for Prospective Students</span>, I had the chance to talk to students and convince them to join the aforementioned program at our school, and I had the chance to showcase some of my previous projects including <span class="darkgreen">Re</span><span class="golden">Sourced</span>. Lastly, a couple of friends and I were responsible for travelling to a Middle School and enlightening the future students there about High School, the challenges that come along with it, as well as running a <span class="yellow">Py</span><span class="blue">thon</span> Workshop with them.</p>
+      </div>
+    </div>
+    
+    <div class="card animate-on-scroll" id="certificate">
+      <h3 class="card-title">Completed <span class="highlight">"Intro to Human Rights and Equity"</span> Course by <span class="volun">Volunteer</span> <span class="toronto">Toronto</span></h3>
+      <div class="card-content">
+        <p>Completed all parts of the <span class="highlight">"Intro to Human Rights and Equity"</span> Course by <span class="volun">Volunteer</span> <span class="toronto">Toronto</span> necessary for volunteering at large professional venues such as the <span class="highlight">Elevate Festival</span> and the <span class="highlight">Toronto International Film Festival</span>.</p>
+      </div>
+    </div>
+    
+    <div class="card animate-on-scroll" id="candidates">
+      <h3 class="card-title">Volunteer at the <span class="orange">2024 FIDE Candidates</span>: 1 of 300 across Canada</h3>
+      <div class="card-content">
+        <p>Volunteer at the <span class="orange">2024 FIDE Candidates</span>, the most competitive world-class tournament where the next World Champion was chosen. Had the chance to work and meet people from all across the globe who were connected by the wonderful game of Chess. I was <span class="orange">1 of 300</span> people all across Canada who received the chance to volunteer at this best of the best tournament. I had the chance to meet, interview, and take pictures with the best minds in Chess not only in Canada, but across the world.</p>
+      </div>
+    </div>
+    
+    <div class="card animate-on-scroll" id="ihpyc">
+      <h3 class="card-title">Student Ambassador of the <span class="red">International Humanitarian Peel Youth Council</span>, a division of the <span class="red">Canadian Red Cross</span></h3>
+      <div class="card-content">
+        <p>Student Ambassador of the <span class="red">International Humanitarian Peel Youth Council</span>, a division of the <span class="red">Canadian Red Cross</span>. As an Ambassador, my responsibilities included helping to plan two large humanitarian events held at <span class="gold">"University of Toronto: Mississauga"</span> and one in <span class="gold">"Palais Royale"</span> in the heart of Toronto, as well as advertise the event. We were able to get <span class="gold">more than 500 students</span> to participate in the cause on both occasions. I was <span class="gold">1 of 3</span> in Grade 9, and <span class="gold">1 of 300</span> across the entire Greater Toronto Area.</p>
+      </div>
+    </div>
+    
+    <div class="card animate-on-scroll" id="autobox">
+      <h3 class="card-title">Host and Reviewer at Auto<span class="green">Box</span></h3>
+      <div class="card-content">
+        <p>When I was younger, aligned with my interest in the Automotive sector, I had the chance of being the host of Auto<span class="green">Box</span> as a Car Reviewer where I had the chance to improve on my communication skills while learning about and experiencing numerous different vehicles and their features.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Me Section -->
+  <section class="section" id="aboutme">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-container animate-on-scroll">
+      <div class="about-image">
+        <img src="sarv.jpg" alt="Sarveshwar Senthil Kumar" style="border-radius: 15px;">
+      </div>
+      <div class="about-content">
+        <div class="card">
+          <div class="card-content">
+            <p>My name is Sarveshwar Senthil Kumar, and I am an aspiring software engineer. When I was 10 years old, I learned how to program in <span class="yellow">Py</span><span class="blue">thon</span> as part of a school Genius Hour project, even since, I have been fascinated by the world of Computer Science and Technology.</p>
+            <p style="margin-top: 15px;">I am a person who enjoys honing my problem-solving skills as can be seen by my two biggest passions of Computer Science and Chess. I also believe that my strength lies in my collaboration and communications skills as proven by my collaborative projects like <span class="darkgreen">Re</span><span class="golden">Sourced</span> and my marketing and public projects such as <a href="https://zugzwangcc.wordpress.com" style="color: yellow;">Zugzwang</a> as well as Auto<span class="green">Box</span>.</p>
+            <p style="margin-top: 15px;">I am grateful for the opportunities I have had leading up to the present and for the projects that had led me to build up the skillset and experience I have currently, and I am looking forward to the future and wherever it leads me. I look forward to enhancing my skills and building up experience which I can one day use to my advantage.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section" id="contactme">
+    <h2 class="section-title">Contact Me</h2>
+    <div class="contact-grid animate-on-scroll">
+      <div class="contact-card">
+        <i class="fas fa-envelope contact-icon"></i>
+        <h3>Email</h3>
+        <a href="mailto: Sarveshwar313@gmail.com">Sarveshwar313@gmail.com</a><br>
+        <a href="mailto: SarvesMS@outlook.com">SarvesMS@outlook.com</a>
+      </div>
+      
+      <div class="contact-card">
+        <i class="fas fa-phone contact-icon"></i>
+        <h3>Phone</h3>
+        <a href="tel:437-450-4378">+1 (437) 450-4378</a>
+      </div>
+      
+      <div class="contact-card">
+        <i class="fab fa-github contact-icon"></i>
+        <h3>GitHub</h3>
+        <a target="_blank" href="https://github.com/SarveshwarSenthilKumar">@SarveshwarSenthilKumar</a>
+      </div>
+      
+      <div class="contact-card">
+        <i class="fas fa-code contact-icon"></i>
+        <h3>Replit</h3>
+        <a target="_blank" href="https://replit.com/@sarvesh313">@Sarvesh313</a>
+      </div>
+      
+      <div class="contact-card">
+        <i class="fab fa-wordpress contact-icon"></i>
+        <h3>WordPress</h3>
+        <a target="_blank" href="https://sarvesh313.wordpress.com">sarvesh313.wordpress.com</a>
+      </div>
+      
+      <div class="contact-card">
+        <i class="fab fa-linkedin contact-icon"></i>
+        <h3>LinkedIn</h3>
+        <a target="_blank" href="https://www.linkedin.com/in/sarveshwarsenthilkumar/">@SarveshwarSenthilKumar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Created by Sarveshwar Senthil Kumar</p>
+    <p>&copy; 2025 All Rights Reserved</p>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <a href="#start" class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <script>
+    // Navigation scroll effect
+    let prevScrollpos = window.pageYOffset;
+    const navbar = document.querySelector('.topnav');
+    
+    window.onscroll = function() {
+      let currentScrollPos = window.pageYOffset;
+      
+      if (prevScrollpos > currentScrollPos) {
+        // Scrolling up - show the navbar
+        navbar.classList.remove('hidden');
+        navbar.classList.add('visible');
+      } else {
+        // Scrolling down - hide the navbar
+        navbar.classList.remove('visible');
+        navbar.classList.add('hidden');
+      }
+      prevScrollpos = currentScrollPos;
+      
+      // Back to top button
+      const backToTop = document.querySelector('.back-to-top');
+      if (window.pageYOffset > 300) {
+        backToTop.classList.add('active');
+      } else {
+        backToTop.classList.remove('active');
+      }
+      
+      // Animate on scroll
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        
+        if (elementPosition < screenPosition) {
+          element.classList.add('visible');
+        }
+      });
+    };
+    
+    // Slideshow functionality
+    let slideIndex = 1;
+    showSlides(slideIndex);
+    
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}    
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";  
+      dots[slideIndex-1].className += " active";
+    }
+    
+    // Auto-advance slideshow
+    setInterval(() => {
+      plusSlides(1);
+    }, 5000);
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

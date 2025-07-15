@@ -25,11 +25,19 @@
           <li class="nav-item"><a class="nav-link" href="achievements.html">Achievements</a></li>
           <li class="nav-item"><a class="nav-link" href="resume.html">Resume</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
       </div>
     </div>
   </nav>
+<!-- Fixed Search Bar below header -->
+<div class="container-fluid bg-dark py-3" style="position:sticky;top:56px;z-index:1020;">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+      <input id="pageSearchContact" class="form-control form-control-lg" type="search" placeholder="Search contact info..." aria-label="Search" style="background: #181c24; color: #fff; border: 2px solid #00e699; border-radius: 12px; font-size: 1.1rem;">
+    </div>
+  </div>
+</div>
 
   <main style="flex: 1 0 auto;">
     <div class="container py-5">
@@ -62,5 +70,18 @@
     <div style="font-size:1vw;">&copy; 2025 Sarveshwar Senthil Kumar. All rights reserved.</div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function filterContactContent() {
+      const query = document.getElementById('pageSearchContact').value.trim().toLowerCase();
+      const contactSection = document.querySelector('.container.py-5');
+      if (!query) {
+        contactSection.style.display = '';
+        return;
+      }
+      const text = contactSection.textContent.toLowerCase();
+      contactSection.style.display = text.includes(query) ? '' : 'none';
+    }
+    document.getElementById('pageSearchContact').addEventListener('input', filterContactContent);
+  </script>
 </body>
 </html> 

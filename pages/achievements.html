@@ -30,6 +30,14 @@
       </div>
     </div>
   </nav>
+  <!-- Fixed Search Bar below header -->
+  <div class="container-fluid bg-dark py-3" style="position:sticky;top:56px;z-index:1020;">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8">
+        <input id="pageSearchAchievements" class="form-control form-control-lg" type="search" placeholder="Search achievements (page)..." aria-label="Search" style="background: #181c24; color: #fff; border: 2px solid #00e699; border-radius: 12px; font-size: 1.1rem;">
+      </div>
+    </div>
+  </div>
 
   <main style="flex: 1 0 auto;">
     <div class="container py-5">
@@ -152,6 +160,13 @@
     document.addEventListener('DOMContentLoaded', () => {
       renderAchievements();
     });
+
+    document.getElementById('pageSearchAchievements').addEventListener('input', filterAchievementsPageContent);
+
+    function filterAchievementsPageContent() {
+      const query = document.getElementById('pageSearchAchievements').value.trim().toLowerCase();
+      // ... implement page-level filtering if needed ...
+    }
   </script>
 </body>
 </html> 

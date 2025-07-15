@@ -20,7 +20,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="pages/portfolio.html">Portfolio</a></li>
           <li class="nav-item"><a class="nav-link" href="pages/achievements.html">Achievements</a></li>
           <li class="nav-item"><a class="nav-link" href="pages/resume.html">Resume</a></li>
@@ -30,6 +30,14 @@
       </div>
     </div>
   </nav>
+  <!-- Fixed Search Bar below header -->
+  <div class="container-fluid bg-dark py-3" style="position:sticky;top:56px;z-index:1020;">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8">
+        <input id="pageSearchIndex" class="form-control form-control-lg" type="search" placeholder="Search this page..." aria-label="Search" style="background: #181c24; color: #fff; border: 2px solid #00e699; border-radius: 12px; font-size: 1.1rem;">
+      </div>
+    </div>
+  </div>
   <!-- Hero Section -->
   <section class="hero d-flex flex-column align-items-center justify-content-center text-center py-5" style="min-height: 90vh;">
     <img src="assets/sarv.jpg" alt="Sarveshwar Senthil Kumar" class="rounded-circle shadow-lg mb-4" style="width: 180px; height: 180px; object-fit: cover; border: 4px solid #00bb77;">
@@ -66,5 +74,19 @@
     <div style="font-size:1vw;">&copy; 2025 Sarveshwar Senthil Kumar. All rights reserved.</div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function filterIndexContent() {
+      const query = document.getElementById('pageSearchIndex').value.trim().toLowerCase();
+      const hero = document.querySelector('.hero');
+      if (!query) {
+        hero.style.display = '';
+        return;
+      }
+      // Hide hero if it doesn't match
+      const text = hero.textContent.toLowerCase();
+      hero.style.display = text.includes(query) ? '' : 'none';
+    }
+    document.getElementById('pageSearchIndex').addEventListener('input', filterIndexContent);
+  </script>
 </body>
 </html>

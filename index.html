@@ -66,15 +66,68 @@
       <div class="card-body bg-dark text-light rounded-3">
         <h2 class="mb-4 text-center" style="color:#00e699;"><i class="fa-solid fa-list-ul me-2"></i>Site Table of Contents</h2>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item bg-dark text-light"><a href="index.html" class="text-decoration-none text-info"><i class="fa-solid fa-house me-2"></i>Home</a></li>
-          <li class="list-group-item bg-dark text-light"><a href="pages/portfolio.html" class="text-decoration-none text-info"><i class="fa-solid fa-briefcase me-2"></i>Portfolio</a> <span class="text-secondary">– All technical, non-technical, hackathon, and school projects</span></li>
-          <li class="list-group-item bg-dark text-light"><a href="pages/achievements.html" class="text-decoration-none text-info"><i class="fa-solid fa-trophy me-2"></i>Achievements</a> <span class="text-secondary">– Searchable list of awards and recognitions</span></li>
-          <li class="list-group-item bg-dark text-light"><a href="pages/resume.html" class="text-decoration-none text-info"><i class="fa-solid fa-file-lines me-2"></i>Resume</a> <span class="text-secondary">– Downloadable and interactive resume</span></li>
-          <li class="list-group-item bg-dark text-light"><a href="pages/about.html" class="text-decoration-none text-info"><i class="fa-solid fa-user me-2"></i>About</a> <span class="text-secondary">– Background, skills, and interests</span></li>
-          <li class="list-group-item bg-dark text-light"><a href="pages/contact.html" class="text-decoration-none text-info"><i class="fa-solid fa-envelope me-2"></i>Contact</a> <span class="text-secondary">– Get in touch</span></li>
+          <li class="list-group-item bg-dark text-light">
+            <a href="index.html" class="text-decoration-none text-info" data-bs-toggle="collapse" data-bs-target="#tocHome" aria-expanded="false" aria-controls="tocHome"><i class="fa-solid fa-house me-2"></i>Home</a>
+            <div class="collapse mt-2" id="tocHome">
+              <ul class="list-unstyled ms-4">
+                <li><a href="#" class="text-secondary">Hero Section</a></li>
+                <li><a href="#site-toc" class="text-secondary">Table of Contents</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="list-group-item bg-dark text-light">
+            <a href="pages/portfolio.html" class="text-decoration-none text-info" data-bs-toggle="collapse" data-bs-target="#tocPortfolio" aria-expanded="false" aria-controls="tocPortfolio"><i class="fa-solid fa-briefcase me-2"></i>Portfolio</a>
+            <div class="collapse mt-2" id="tocPortfolio">
+              <ul class="list-unstyled ms-4">
+                <li><a href="pages/portfolio.html#technical-projects" class="text-secondary">Technical Projects</a></li>
+                <li><a href="pages/portfolio.html#hackathon-projects" class="text-secondary">Hackathon Projects</a></li>
+                <li><a href="pages/portfolio.html#non-technical-projects" class="text-secondary">Non-Technical Projects</a></li>
+                <li><a href="pages/portfolio.html#school-projects" class="text-secondary">School Projects</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="list-group-item bg-dark text-light">
+            <a href="pages/achievements.html" class="text-decoration-none text-info" data-bs-toggle="collapse" data-bs-target="#tocAchievements" aria-expanded="false" aria-controls="tocAchievements"><i class="fa-solid fa-trophy me-2"></i>Achievements</a>
+            <div class="collapse mt-2" id="tocAchievements">
+              <ul class="list-unstyled ms-4">
+                <li><a href="pages/achievements.html#achievementSearch" class="text-secondary">Achievements Search</a></li>
+                <li><a href="pages/achievements.html#achievementsContainer" class="text-secondary">Achievements List</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="list-group-item bg-dark text-light">
+            <a href="pages/resume.html" class="text-decoration-none text-info" data-bs-toggle="collapse" data-bs-target="#tocResume" aria-expanded="false" aria-controls="tocResume"><i class="fa-solid fa-file-lines me-2"></i>Resume</a>
+            <div class="collapse mt-2" id="tocResume">
+              <ul class="list-unstyled ms-4">
+                <li><a href="pages/resume.html#total" class="text-secondary">Total Resume</a></li>
+                <li><a href="pages/resume.html#technical" class="text-secondary">Technical Resume</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="list-group-item bg-dark text-light">
+            <a href="pages/about.html" class="text-decoration-none text-info" data-bs-toggle="collapse" data-bs-target="#tocAbout" aria-expanded="false" aria-controls="tocAbout"><i class="fa-solid fa-user me-2"></i>About</a>
+            <div class="collapse mt-2" id="tocAbout">
+              <ul class="list-unstyled ms-4">
+                <li><a href="pages/about.html#about-me" class="text-secondary">About Me</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="list-group-item bg-dark text-light">
+            <a href="pages/contact.html" class="text-decoration-none text-info" data-bs-toggle="collapse" data-bs-target="#tocContact" aria-expanded="false" aria-controls="tocContact"><i class="fa-solid fa-envelope me-2"></i>Contact</a>
+            <div class="collapse mt-2" id="tocContact">
+              <ul class="list-unstyled ms-4">
+                <li><a href="pages/contact.html#" class="text-secondary">Email</a></li>
+                <li><a href="pages/contact.html#" class="text-secondary">Call or SMS</a></li>
+                <li><a href="pages/contact.html#" class="text-secondary">GitHub</a></li>
+                <li><a href="pages/contact.html#" class="text-secondary">Replit</a></li>
+                <li><a href="pages/contact.html#" class="text-secondary">WordPress</a></li>
+                <li><a href="pages/contact.html#" class="text-secondary">LinkedIn</a></li>
+              </ul>
+            </div>
+          </li>
         </ul>
         <div class="mt-4 text-center">
-          <small class="text-secondary">Jump to any section of the site using the links above.</small>
+          <small class="text-secondary">Click a page to view its sections, then jump directly to what you need.</small>
         </div>
       </div>
     </div>

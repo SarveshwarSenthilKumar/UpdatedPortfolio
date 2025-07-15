@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
-<body>
+<body style="min-height: 100vh; display: flex; flex-direction: column;">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
@@ -31,21 +31,19 @@
     </div>
   </nav>
 
-  <div class="container py-5">
-    <h1 class="mb-4 text-center" style="font-weight: bold; color: #00bb77;">Achievements</h1>
-    <div class="row justify-content-center mb-4">
-      <div class="col-md-8">
-        <input type="text" id="achievementSearch" class="form-control form-control-lg" placeholder="Try 'chess', 'hackathon', or type 'all'...">
+  <main style="flex: 1 0 auto;">
+    <div class="container py-5">
+      <h1 class="mb-4 text-center" style="font-weight: bold; color: #00bb77;">Achievements</h1>
+      <div class="row justify-content-center mb-4">
+        <div class="col-md-10">
+          <input type="text" id="achievementSearch" class="form-control form-control-lg" placeholder="Type to filter achievements (e.g. 'chess', 'hackathon', or 'all')..." oninput="filterAchievements()" style="background: #181c24; color: #fff; border: 2px solid #00e699; border-radius: 12px; font-size: 1.3rem; box-shadow: 0 2px 12px rgba(0,0,0,0.15);">
+        </div>
       </div>
-      <div class="col-md-2">
-        <button class="btn btn-success btn-lg w-100" onclick="handleSearch()">Search</button>
-      </div>
+      <div id="achievementsContainer" class="row g-4 justify-content-center" style="max-height: 60vh; overflow-y: auto; background: #181c24; border-radius: 18px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); padding: 2rem 1rem;"></div>
     </div>
-    <div id="searchStatus" class="text-center mb-3" style="font-size: 1.2vw; min-height: 24px; color: #00bb77;">Loading achievements...</div>
-    <div id="achievementsContainer" class="row g-3 justify-content-center"></div>
-  </div>
+  </main>
   <!-- Footer -->
-  <footer class="mt-5">
+  <footer class="mt-5" style="flex-shrink: 0; background: #181c24; border-top: 2px solid #00e699; color: #fff;">
     <div class="footer-social mb-2">
       <a href="https://github.com/SarveshwarSenthilKumar" target="_blank"><i class="fab fa-github"></i></a>
       <a href="https://replit.com/@sarvesh313" target="_blank"><i class="fa-solid fa-code"></i></a>
@@ -58,68 +56,101 @@
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    let achievements = [];
-    let loaded = false;
-    let error = null;
-    async function loadAchievements() {
-      try {
-        const res = await fetch('../achievements.json');
-        achievements = await res.json();
-        loaded = true;
-        updateStatus(`Loaded ${achievements.length} achievements. Start searching!`, 'success');
-      } catch (e) {
-        error = e;
-        updateStatus('Failed to load achievements.', 'error');
-      }
-    }
-    function updateStatus(message, type = 'info') {
-      const statusElement = document.getElementById('searchStatus');
-      statusElement.textContent = message;
-      statusElement.style.color = type === 'error' ? '#ff6b6b' : type === 'success' ? '#00bb77' : 'white';
-    }
-    function clearResults() {
-      document.getElementById('achievementsContainer').innerHTML = '';
-    }
-    function displayResults(results) {
+    // Achievements array (as in legacyindex.html)
+    const achievements = [
+      "Won science fair in grade 3",
+      "Ran for vice president in grade 4",
+      "Was a car reviewer with Autobox where i built communication skills",
+      "Learned programming at the age of 10, won the genius hour award at school",
+      "CSN, presentation to the school, was a host",
+      "Created a software used by the entire class",
+      "Created software used by the entire school to play a game",
+      "ReSourced, created a student-led nonprofit organization that was on the news",
+      "ReSourced club at school, created rapport with tech teacher and led a tech team, coding course",
+      "Started chess club at school, first meeting",
+      "Was part of medlife",
+      "Took part in coding club",
+      "Was on the school Varsity Chess Team",
+      "Participated in CCC",
+      "Was a Student Ambassador for IHPYC, helped plan two humanitarian events, 1 of 3 in grade 9 35,000$+ across both events with 400 participants each, causes respectively were iranian humanitarian crisis, sickkids, turkey/syria earthquakes",
+      "Qualified for CYCC",
+      "Participated in CCC, 30/75",
+      "Participated in CIMC",
+      "Started Zugzwang Chess Club, grew to around 100 members around the world, organized many events, partnered with universities, chess.com, and chessnut",
+      "Took AP computer science a and got a level 4",
+      "Participated in CYCC, many chess tournaments, won 200$+, hit 2100, beat a national master",
+      "Was a member of Mississauga Chess Club, volunteered there",
+      "Finished all three parts of a Human Rights certificate necessary for volunteering",
+      "Volunteered at the 2024 FIDE Candidates, 1 of 300 all across canada, world class tourney",
+      "Participated in the Canadian Zonals won a prize",
+      "Got the AFM title, only acquired by a few",
+      "Talked to parents about scitech and convinced students at openhouse",
+      "Talked to students and held a presentation about coding to grade 8 students",
+      "Volunteered at a fun fair",
+      "President of the school chess club, participated in two different club fairs",
+      "Member of Hindu Student Association, helped plan Diwali party",
+      "Member of Transportation Club, contacted dealerships and controlled a car using computer",
+      "Streamer and commentator of chess games on Twitch at Zugzwang",
+      "Computer Engineering Enthusiast, help out with projects across school, treadmill tachometer",
+      "Contributed to an autonomous self driving car project with Auto-Throttle",
+      "Self-taught programming - CS50 normal and AI, Python Course",
+      "Learned numerous skills related to tech: woodworking, onshape, metal-working, lathe, mill, arduino, raspberry pi, electrical circuitry",
+      "Created tech projects such as Compressed Air Car, Tic-Tac-Toe Board, Onshape F40 and other",
+      "Participated in Hack Canada, selective exclusive hackathon high school to university, collaborated with Ram Parmar, Ritaj Malik, and Katherine Li to create a website (CareAge) 1,200+ applicants, 400+ hackers, 89 projects, and 23 sponsors",
+      "1 of 100 accepted to SproutHacks, high school hackathon by MLH at Conestoga College",
+      "Participated in GenAI Genesis, Canada’s largest AI hackathon, selective exclusive hackathon, collaborated with Mahan Nourhosseinalipour, Cayden Wong, and Tommy Yu to create a tool to solve a global issue, scam emails, and categorize folders and provide summary in process (InboxArmour), 2100 applicants, 550 hackers, 160 projects.",
+      "Participated in EurekaHacks, Canada’s largest High School Hackathon, selective exclusive hackathon, collaborated with Pranav Bailoor to create an app which finds your location and delivers personalized trip plans for a day, 300 hackers, more than 50 projects",
+      "Participated in JAMHacks 9, Canada’s largest High School Hackathon with more than 200 hackers and more than 60 projects. Collaborated with Devansh Goyal and Clare Chen to built an AI powered network for doctors.",
+      "Finance Executive for Hack the Skies, Logistics Executive for DuploHacks",
+      "Represented Port Credit Secondary School at a Peel District Chess Tournament where we won 2nd place, 1st without tiebreaks",
+      "Organizing a Peel District-wide Chess Tournament with participants from multiple schools; leading logistics, outreach, and event coordination",
+      "Accepted to SpurHacks, Canada’s largest hackathon",
+      "Accepted to SolutionHacks, held at Toronto Metropolitan University, 1 of 250 people accepted",
+      "Participated in the school science fair and won 1st place out of 20 teams, researching the effect of fan designs on pc cooling",
+      "Made it to the second round of the DMZ Micro Grant Challenge, 1 of 100 people all across the peel and toronto district school board.",
+      "Participated in Hack404, a hackathon with more than 220 hackers and more than 45 projects. Collaborated with Devansh Goel, Farhan Naeem, Yichen Xiao to create a Pokemon Go but for trash collection in order to help the environment."
+    ];
+
+    function renderAchievements(filter = '') {
       const container = document.getElementById('achievementsContainer');
-      clearResults();
-      if (results.length === 0) {
-        updateStatus('No matching achievements found.', 'info');
+      container.innerHTML = '';
+      const normalized = filter.trim().toLowerCase();
+      let filtered = achievements;
+      if (normalized && normalized !== 'all') {
+        filtered = achievements.filter(a => a.toLowerCase().includes(normalized));
+      }
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="text-center text-muted" style="color: #ff6b6b; font-size: 1.2rem;">No matching achievements found.</div>';
         return;
       }
-      updateStatus(`Found ${results.length} matching achievements:`, 'success');
-      results.forEach((achievement, index) => {
+      filtered.forEach((achievement, i) => {
         const col = document.createElement('div');
-        col.className = 'col-12';
+        col.className = 'col-12 col-md-10 col-lg-8';
         col.innerHTML = `
-          <div style="background-color: #222; border-radius: 8px; padding: 18px; border-left: 4px solid #00bb77; margin-bottom: 10px; box-shadow: 0 3px 6px rgba(0,0,0,0.16); transition: all 0.3s ease; display: flex; align-items: center;">
-            <span style="margin-right: 15px; color: #00bb77; font-weight: bold;">${index + 1}.</span>
-            <span>${achievement}</span>
+          <div style="background: linear-gradient(90deg, #232a34 60%, #1a1f27 100%); border-radius: 16px; padding: 1.5rem 2rem; border-left: 5px solid #00e699; margin-bottom: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); display: flex; align-items: flex-start; transition: box-shadow 0.3s, transform 0.3s; color: #f8fafd; font-size: 1.15rem;">
+            <span style="margin-right: 18px; color: #00e699; font-weight: bold; font-size: 1.3rem;">${i + 1}.</span>
+            <span style="flex: 1; line-height: 1.6;">${achievement}</span>
           </div>
         `;
+        col.onmouseover = () => {
+          col.firstChild.style.transform = 'translateY(-2px) scale(1.02)';
+          col.firstChild.style.boxShadow = '0 8px 32px rgba(0,230,153,0.10), 0 2px 12px rgba(0,0,0,0.18)';
+        };
+        col.onmouseout = () => {
+          col.firstChild.style.transform = 'none';
+          col.firstChild.style.boxShadow = '0 4px 24px rgba(0,0,0,0.18)';
+        };
         container.appendChild(col);
       });
     }
-    function handleSearch() {
-      if (!loaded) {
-        updateStatus('Achievements are still loading...', 'error');
-        return;
-      }
-      const searchInput = document.getElementById('achievementSearch');
-      const query = searchInput.value.trim();
-      if (query === '') {
-        updateStatus('Please enter a search term or type "all"', 'error');
-        return;
-      }
-      const normalizedQuery = query.toLowerCase();
-      const results = normalizedQuery === 'all' ? achievements : achievements.filter(a => a.toLowerCase().includes(normalizedQuery));
-      displayResults(results);
+
+    function filterAchievements() {
+      const val = document.getElementById('achievementSearch').value;
+      renderAchievements(val);
     }
+
     document.addEventListener('DOMContentLoaded', () => {
-      loadAchievements();
-      document.getElementById('achievementSearch').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleSearch();
-      });
+      renderAchievements();
     });
   </script>
 </body>
